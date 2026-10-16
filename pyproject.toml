@@ -19,6 +19,8 @@ dependencies = [
   "PyJWT>=2.8",
   # Required by FastAPI to parse OAuth2 form bodies (application/x-www-form-urlencoded).
   "python-multipart>=0.0.9",
+  "celery>=5.3",
+  "redis>=5.0",
 ]
 
 [project.optional-dependencies]

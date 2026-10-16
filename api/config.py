@@ -24,5 +24,8 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60
 
+    # Cache settings
+    cache_ttl_seconds: int = 300
+
 
 settings = Settings()

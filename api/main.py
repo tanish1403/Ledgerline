@@ -4,13 +4,15 @@ from sqlalchemy import text
 
 from api.config import settings
 from api.db.session import engine
-from api.routers import auth, datasets, users
+from api.routers import auth, datasets, jobs, users
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(datasets.router)
+app.include_router(jobs.admin_router)
+app.include_router(jobs.jobs_router)
 
 
 @app.get("/health", tags=["meta"])

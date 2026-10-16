@@ -50,6 +50,25 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
 
+  worker:
+    build:
+      context: .
+      dockerfile: deploy/docker/Dockerfile
+    command: ["celery", "-A", "api.worker.celery_app", "worker", "--loglevel=info"]
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-reliability}
+      REDIS_URL: redis://redis:6379/0
+      LLM_BASE_URL: ${LLM_BASE_URL_IN_DOCKER:-http://host.docker.internal:20128/v1}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
   # Optional local model server:  docker compose --profile ollama up
   ollama:
     image: ollama/ollama:latest

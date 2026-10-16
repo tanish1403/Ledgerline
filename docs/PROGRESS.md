@@ -5,7 +5,7 @@ Write anything left undone under "Open items".
 
 - [x] 0. Skeleton: health endpoint, Docker, Compose, CI, agent rules
 - [x] 1. Auth, roles, datasets API
-- [ ] 2. Redis cache and background jobs
+- [x] 2. Redis cache and background jobs
 - [ ] 3. Tool-calling agent
 - [ ] 4. Reliability stats and validators
 - [ ] 5. Audit log
@@ -31,4 +31,5 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 | 2026-10-16 | JWT library: PyJWT over python-jose | Simpler, actively maintained, no hidden transitive crypto dependencies |
 | 2026-10-16 | Test DB isolation: SAVEPOINT rollback over pytest-postgresql | No extra dependency; works against CI's existing Postgres service container |
 | 2026-10-16 | Alembic env.py pulls DATABASE_URL from settings | Keeps credentials out of alembic.ini and therefore out of version control |
+| 2026-10-16 | Caching & Background Jobs: Redis caching + Celery tasks | Redis for caching GET /datasets with hit/miss counter stats and invalidation on write; Celery worker with `run_analysis` task, `jobs` table, idempotency key deduplication, and ownership checks |
 

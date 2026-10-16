@@ -1,14 +1,15 @@
 """SQLAlchemy ORM models.
 
 Why here: keeping models in one file makes it easy to see the full schema at a
-glance. The Role enum is defined in Python so both the ORM and the rest of the
-app share one source of truth.
+glance. The Role and JobStatus enums are defined in Python so both the ORM
+and the rest of the app share one source of truth.
 """
 
 import enum
 from datetime import UTC, datetime
+from typing import Any
 
-from sqlalchemy import Boolean, DateTime, Enum, ForeignKey, Integer, String, Text
+from sqlalchemy import JSON, Boolean, DateTime, Enum, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -22,6 +23,15 @@ class Role(enum.StrEnum):
     viewer = "viewer"
     analyst = "analyst"
     admin = "admin"
+
+
+class JobStatus(enum.StrEnum):
+    """Job execution status."""
+
+    queued = "queued"
+    running = "running"
+    succeeded = "succeeded"
+    failed = "failed"
 
 
 def _now() -> datetime:
@@ -42,6 +52,7 @@ class User(Base):
     )
 
     datasets: Mapped[list["Dataset"]] = relationship("Dataset", back_populates="owner")
+    jobs: Mapped[list["Job"]] = relationship("Job", back_populates="creator")
 
 
 class Dataset(Base):
@@ -56,3 +67,24 @@ class Dataset(Base):
     )
 
     owner: Mapped["User"] = relationship("User", back_populates="datasets")
+
+
+class Job(Base):
+    __tablename__ = "jobs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    type: Mapped[str] = mapped_column(String(100), nullable=False)
+    status: Mapped[JobStatus] = mapped_column(
+        Enum(JobStatus, name="job_status_enum"), nullable=False, default=JobStatus.queued
+    )
+    params: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    result: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    idempotency_key: Mapped[str | None] = mapped_column(String(255), nullable=True, index=True)
+    created_by: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, default=_now
+    )
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    creator: Mapped["User"] = relationship("User", back_populates="jobs")
