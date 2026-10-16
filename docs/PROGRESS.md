@@ -30,6 +30,8 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 | 2026-10-16 | DB driver: psycopg[binary] (psycopg3) over psycopg2-binary | psycopg3 is the current release; binary wheel skips C compilation on all platforms |
 | 2026-10-16 | JWT library: PyJWT over python-jose                        | Simpler, actively maintained, no hidden transitive crypto dependencies             |
 
+- Milestone 5 completed: Tamper-evident hash-chained audit log, event redactor, audit verification endpoint, and documentation (`docs/audit.md`).
+
 # Milestone 4 completed: Reliability statistics tools, C-MAPSS dataset models & loader, and deterministic claim validator.
 
 | 2026-10-16 | Test DB isolation: SAVEPOINT rollback over pytest-postgresql | No extra dependency; works against CI's existing Postgres service container |
