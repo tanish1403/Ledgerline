@@ -1,0 +1,11 @@
+groups:
+  - name: reliability_alerts
+    rules:
+      - alert: HighToolErrorRate
+        expr: rate(tool_errors_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High tool execution error rate detected"
+          description: "Tool error rate is above 5% for more than 5 minutes."

@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Request Latency Percentiles",
+      "type": "timeseries",
+      "targets": []
+    },
+    {
+      "id": 2,
+      "title": "Tool-Call Error Rate",
+      "type": "timeseries",
+      "targets": []
+    },
+    {
+      "id": 3,
+      "title": "Token Usage",
+      "type": "timeseries",
+      "targets": []
+    },
+    {
+      "id": 4,
+      "title": "Agent Run Duration",
+      "type": "timeseries",
+      "targets": []
+    },
+    {
+      "id": 5,
+      "title": "Pending Approvals",
+      "type": "stat",
+      "targets": []
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Reliability Agent Platform Health",
+  "version": 1
+}

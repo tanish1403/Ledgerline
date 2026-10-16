@@ -34,6 +34,8 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 - Milestone 6 completed: Human approval gate with LangGraph interruption, inspection flagging tool, Alembic migration, separation of duties, rollback, audit logging, and documentation (`docs/approvals.md`).
 - Milestone 7 completed: Hybrid RAG module with pgvector, sentence-transformers, verified citations, confidence flag, role-based chunk filtering, versioning, and documentation (`docs/rag.md`).
 - Milestone 8 completed: Golden-set evaluations (`evals/`), replay and live modes, baseline comparison regression gate (`compare.py`), CI workflow integration, and documentation (`docs/evals.md`).
+- Milestone 9 completed: OpenTelemetry tracing setup, custom Prometheus metrics, structured JSON logging with trace/span IDs, observability Docker Compose configuration (`deploy/compose/observability.yml`), Grafana dashboard provisioning, and Prometheus alert rules (`observability/`).
+
 
 
 
