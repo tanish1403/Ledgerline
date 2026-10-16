@@ -1,0 +1,2 @@
+{"question_id": 1, "query": "What causes turbine bearing failure?", "expected_doc": "turbine_manual.pdf", "expected_page": 1, "answerable": true}
+{"question_id": 2, "query": "What is the capital of Mars?", "expected_doc": "", "expected_page": 0, "answerable": false}

@@ -1,0 +1,3 @@
+{"task_id": 1, "prompt": "Fit Weibull to unit group A", "expected_tool": "fit_weibull", "expected_metric": "eta"}
+{"task_id": 2, "prompt": "Calculate Kaplan-Meier survival curve", "expected_tool": "kaplan_meier", "expected_metric": "survival"}
+{"task_id": 3, "prompt": "Flag units for inspection", "expected_tool": "flag_units_for_inspection", "expected_metric": "flag_id"}

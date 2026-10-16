@@ -1,0 +1,10 @@
+{
+  "task_success_rate": 1.0,
+  "validator_pass_rate": 1.0,
+  "tool_call_error_rate": 0.0,
+  "approval_bypass_attempts": 0.0,
+  "retrieval_recall": 1.0,
+  "mrr": 1.0,
+  "citation_validity_rate": 1.0,
+  "not_found_correctness": 1.0
+}
