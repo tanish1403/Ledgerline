@@ -4,7 +4,7 @@ Tick a box only when its acceptance criteria in the milestone prompt are met and
 Write anything left undone under "Open items".
 
 - [x] 0. Skeleton: health endpoint, Docker, Compose, CI, agent rules
-- [ ] 1. Auth, roles, datasets API
+- [x] 1. Auth, roles, datasets API
 - [ ] 2. Redis cache and background jobs
 - [ ] 3. Tool-calling agent
 - [ ] 4. Reliability stats and validators
@@ -18,7 +18,7 @@ Write anything left undone under "Open items".
 
 ## Open items
 
-(none yet)
+(none)
 
 ## Decisions log
 
@@ -26,3 +26,9 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 
 | Date | Decision | Why |
 | --- | --- | --- |
+| 2026-10-16 | Password hashing: bcrypt over argon2-cffi | Pre-built wheels on Windows; simpler API; familiar to interviewers |
+| 2026-10-16 | DB driver: psycopg[binary] (psycopg3) over psycopg2-binary | psycopg3 is the current release; binary wheel skips C compilation on all platforms |
+| 2026-10-16 | JWT library: PyJWT over python-jose | Simpler, actively maintained, no hidden transitive crypto dependencies |
+| 2026-10-16 | Test DB isolation: SAVEPOINT rollback over pytest-postgresql | No extra dependency; works against CI's existing Postgres service container |
+| 2026-10-16 | Alembic env.py pulls DATABASE_URL from settings | Keeps credentials out of alembic.ini and therefore out of version control |
+

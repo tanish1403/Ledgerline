@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     environment: str = "dev"
 
     database_url: str = "postgresql://postgres:postgres@localhost:5432/reliability"
+    # Separate DB used by pytest so tests never touch production data.
+    test_database_url: str = "postgresql://postgres:postgres@localhost:5432/reliability_test"
     redis_url: str = "redis://localhost:6379/0"
 
     # OpenAI-compatible LLM endpoint: OmniRoute (default) or Ollama.
