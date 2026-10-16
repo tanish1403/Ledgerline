@@ -35,6 +35,8 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 - Milestone 7 completed: Hybrid RAG module with pgvector, sentence-transformers, verified citations, confidence flag, role-based chunk filtering, versioning, and documentation (`docs/rag.md`).
 - Milestone 8 completed: Golden-set evaluations (`evals/`), replay and live modes, baseline comparison regression gate (`compare.py`), CI workflow integration, and documentation (`docs/evals.md`).
 - Milestone 9 completed: OpenTelemetry tracing setup, custom Prometheus metrics, structured JSON logging with trace/span IDs, observability Docker Compose configuration (`deploy/compose/observability.yml`), Grafana dashboard provisioning, and Prometheus alert rules (`observability/`).
+- Milestone 10 completed: Hardened multi-stage Dockerfile (non-root, production-only deps), Docker Compose profiles & healthchecks, Helm chart (`deploy/helm/reliability/`) with migration job & probes, Kind cluster script (`scripts/kind_up.sh`), CI security scans (Bandit, Trivy, `helm lint`), Dependabot configuration, and deployment documentation (`docs/deploy.md`).
+
 
 
 
