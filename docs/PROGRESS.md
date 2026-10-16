@@ -9,12 +9,12 @@ Write anything left undone under "Open items".
 - [x] 3. Tool-calling agent
 - [x] 4. Reliability stats and validators
 - [x] 5. Audit log
-- [ ] 6. Approval gate and rollback
-- [ ] 7. RAG module
-- [ ] 8. Evaluation harness in CI
-- [ ] 9. Observability
-- [ ] 10. Deployment and security scans
-- [ ] 11. Docs, threat model, demo, resume
+- [x] 6. Approval gate and rollback
+- [x] 7. RAG module
+- [x] 8. Evaluation harness in CI
+- [x] 9. Observability
+- [x] 10. Deployment and security scans
+- [x] 11. Docs, threat model, demo, resume
 
 ## Open items
 

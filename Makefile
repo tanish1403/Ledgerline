@@ -1,3 +1,11 @@
+verify:
+	ruff check .
+	ruff format --check .
+	pytest -q
+	python -m evals.run --mode replay
+	docker build -t reliability-agent-platform:latest .
+
+
 .PHONY: install dev test lint fmt up down logs rules
 
 install:
