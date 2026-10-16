@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
+import tools  # noqa: F401
 from api.config import settings
 from api.db.session import engine
-from api.routers import auth, datasets, jobs, users
+from api.routers import agent, auth, datasets, jobs, users
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
@@ -13,6 +14,7 @@ app.include_router(users.router)
 app.include_router(datasets.router)
 app.include_router(jobs.admin_router)
 app.include_router(jobs.jobs_router)
+app.include_router(agent.router)
 
 
 @app.get("/health", tags=["meta"])

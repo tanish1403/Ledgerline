@@ -6,7 +6,7 @@ Write anything left undone under "Open items".
 - [x] 0. Skeleton: health endpoint, Docker, Compose, CI, agent rules
 - [x] 1. Auth, roles, datasets API
 - [x] 2. Redis cache and background jobs
-- [ ] 3. Tool-calling agent
+- [x] 3. Tool-calling agent
 - [ ] 4. Reliability stats and validators
 - [ ] 5. Audit log
 - [ ] 6. Approval gate and rollback
