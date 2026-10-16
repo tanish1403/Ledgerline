@@ -8,7 +8,7 @@ Write anything left undone under "Open items".
 - [x] 2. Redis cache and background jobs
 - [x] 3. Tool-calling agent
 - [x] 4. Reliability stats and validators
-- [ ] 5. Audit log
+- [x] 5. Audit log
 - [ ] 6. Approval gate and rollback
 - [ ] 7. RAG module
 - [ ] 8. Evaluation harness in CI
@@ -31,6 +31,8 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 | 2026-10-16 | JWT library: PyJWT over python-jose                        | Simpler, actively maintained, no hidden transitive crypto dependencies             |
 
 - Milestone 5 completed: Tamper-evident hash-chained audit log, event redactor, audit verification endpoint, and documentation (`docs/audit.md`).
+- Milestone 6 completed: Human approval gate with LangGraph interruption, inspection flagging tool, Alembic migration, separation of duties, rollback, audit logging, and documentation (`docs/approvals.md`).
+
 
 # Milestone 4 completed: Reliability statistics tools, C-MAPSS dataset models & loader, and deterministic claim validator.
 

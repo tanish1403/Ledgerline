@@ -25,6 +25,8 @@ dependencies = [
   "lifelines>=0.28",
   "numpy>=1.26",
   "pandas>=2.0",
+  "langgraph>=0.2",
+  "langgraph-checkpoint-postgres>=2.0",
 ]
 
 [project.optional-dependencies]
