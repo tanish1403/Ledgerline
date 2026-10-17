@@ -29,7 +29,9 @@ Record choices an interviewer might ask about: what you chose, what you rejected
 | 2026-10-16 | Password hashing: bcrypt over argon2-cffi                  | Pre-built wheels on Windows; simpler API; familiar to interviewers                 |
 | 2026-10-16 | DB driver: psycopg[binary] (psycopg3) over psycopg2-binary | psycopg3 is the current release; binary wheel skips C compilation on all platforms |
 | 2026-10-16 | JWT library: PyJWT over python-jose                        | Simpler, actively maintained, no hidden transitive crypto dependencies             |
+| 2026-10-17 | Web UI: Streamlit over React/Node.js                       | 100% Python stack; zero Node.js build dependencies; native Matplotlib/Lifelines integration |
 
+- Milestone UI completed: Interactive Streamlit Web Dashboard (`ui/app.py`, `ui/views/`) supporting role simulation, Agent Studio with live deterministic recomputation validation, interactive Weibull/Kaplan-Meier analytics, human approval management with separation of duties, cryptographic audit trail verification, and hybrid RAG documentation search.
 - Milestone 5 completed: Tamper-evident hash-chained audit log, event redactor, audit verification endpoint, and documentation (`docs/audit.md`).
 - Milestone 6 completed: Human approval gate with LangGraph interruption, inspection flagging tool, Alembic migration, separation of duties, rollback, audit logging, and documentation (`docs/approvals.md`).
 - Milestone 7 completed: Hybrid RAG module with pgvector, sentence-transformers, verified citations, confidence flag, role-based chunk filtering, versioning, and documentation (`docs/rag.md`).

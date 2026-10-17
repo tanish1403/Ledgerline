@@ -101,3 +101,29 @@ If a deployment introduces regressions:
    ```bash
    helm rollback reliability-release 1
    ```
+
+---
+
+## 7. Launching and Operating the Streamlit Web Dashboard
+
+The Streamlit dashboard (`ui/app.py`) provides an intuitive graphical interface for interacting with the reliability agent, visualizing statistical distributions, managing human approval gates, auditing cryptographic chains, and testing RAG retrieval.
+
+### Local Execution
+To launch the UI in local development mode:
+```bash
+make ui
+# or: streamlit run ui/app.py --server.port 8501
+```
+The dashboard will open in your default browser at `http://localhost:8501`.
+
+### Role Simulation
+Use the role selector in the sidebar to simulate interactions under different RBAC roles:
+- **Analyst (`analyst`)**: Can prompt the agent, explore Weibull/Kaplan-Meier survival curves, search technical documentation, and request unit maintenance holds.
+- **Approver (`approver`)**: Has authorization to review, approve, or reject human-in-the-loop maintenance actions in adherence with separation-of-duties policies.
+- **Admin (`admin`)**: Possesses complete access, including full audit chain verification and tamper-detection testing.
+
+### Docker Stack Operation
+When running the full stack with `docker compose up --build -d`, the UI container will automatically launch and bind to `http://127.0.0.1:8501`. Logs can be monitored via:
+```bash
+docker compose logs -f ui
+```

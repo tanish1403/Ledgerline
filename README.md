@@ -49,14 +49,18 @@ make test
 
 # 4. Start the application development server
 make dev
+
+# 5. Launch the Streamlit Web Dashboard (optional)
+make ui
 ```
 
-Open your browser at `http://localhost:8000/docs` to explore the interactive OpenAPI API documentation.
+Open your browser at `http://localhost:8000/docs` to explore the OpenAPI documentation, and `http://localhost:8501` for the interactive Streamlit Web Dashboard.
 
-To run the full Docker Compose stack (API, PostgreSQL with pgvector, Redis, and Celery worker):
+To run the full Docker Compose stack (API, PostgreSQL with pgvector, Redis, Celery worker, and Web UI):
 ```bash
 docker compose up --build -d
 curl http://localhost:8000/health
+# Open Web UI at http://localhost:8501
 ```
 
 ---
@@ -64,6 +68,7 @@ curl http://localhost:8000/health
 ## Features
 
 - **RBAC & Auth**: JWT authentication with role-based permissions (`analyst`, `approver`, `admin`) restricting tool execution (`api/auth/`, `api/routers/auth.py`).
+- **Web Dashboard**: Streamlit frontend (`ui/app.py`, `ui/views/`) providing Agent Studio, Reliability Analytics, Dual-Party Approvals, Audit Trail Explorer, and RAG Search.
 - **Reliability Stats & Validators**: Weibull and Kaplan-Meier statistical fitting with strict deterministic re-computation validation (`reliability/stats.py`, `validators/recompute.py`).
 - **Hybrid RAG**: Document chunking, sentence-transformers embedding, pgvector HNSW vector search, full-text search, RRF fusion, and verified source citations (`rag/`).
 - **Human Approval Gate**: LangGraph workflow interruption before consequential actions, separation of duties, and approval/rejection queues (`agents/workflow.py`, `api/routers/approvals.py`).
