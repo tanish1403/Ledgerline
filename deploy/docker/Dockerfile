@@ -10,8 +10,8 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY pyproject.toml ./
-# Install only production dependencies (no [dev])
-RUN pip install .
+# Install production and UI dependencies (no [dev])
+RUN pip install ".[ui]"
 
 COPY api ./api
 COPY agents ./agents
@@ -20,6 +20,8 @@ COPY validators ./validators
 COPY audit ./audit
 COPY rag ./rag
 COPY evals ./evals
+COPY reliability ./reliability
+COPY ui ./ui
 
 
 FROM python:3.12-slim-bookworm AS runtime

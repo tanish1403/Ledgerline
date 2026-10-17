@@ -6,7 +6,7 @@ verify:
 	docker build -t reliability-agent-platform:latest .
 
 
-.PHONY: install dev test lint fmt up down logs rules
+.PHONY: install dev ui test lint fmt up down logs rules
 
 install:
 	python -m venv .venv
@@ -14,6 +14,9 @@ install:
 
 dev:
 	uvicorn api.main:app --reload --port 8000
+
+ui:
+	streamlit run ui/app.py
 
 test:
 	pytest -q
