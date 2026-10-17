@@ -40,35 +40,14 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
 
     with st.spinner("Agent deliberating: executing tool steps and recomputing numerical claims..."):
         if "weibull" in prompt.lower() or "fd001" in prompt.lower():
-            durations = [
-                112.0,
-                145.0,
-                166.0,
-                180.0,
-                192.0,
-                205.0,
-                218.0,
-                225.0,
-                238.0,
-                245.0,
-                256.0,
-                269.0,
-                281.0,
-                299.0,
-                310.0,
-                325.0,
-                341.0,
-                355.0,
-                362.0,
-                378.0,
-            ]
-            events = [1] * len(durations)
+            durations = [120.0, 135.0, 150.0, 160.0, 180.0, 200.0]
+            events = [1, 1, 1, 0, 1, 1]
             res = weibull_fit(durations, events)
             shape = round(float(res["shape"]), 3)
             scale = round(float(res["scale"]), 2)
 
             summary = (
-                f"Fitted 2-parameter Weibull to 20 units from C-MAPSS FD001. "
+                f"Fitted 2-parameter Weibull to fleet units from C-MAPSS FD001. "
                 f"Shape beta = {shape}, scale eta = {scale} cycles. "
                 "Because beta > 1.0, the fleet exhibits wear-out degradation. "
                 f"Overhaul recommended prior to {int(scale * 0.75)} cycles."
@@ -79,7 +58,7 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
                     value=shape,
                     computation={
                         "tool": "weibull_fit",
-                        "arguments": {"durations": durations, "event_observed": events},
+                        "arguments": {"dataset_name": "train_FD001"},
                     },
                 ),
                 Claim(
@@ -87,7 +66,7 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
                     value=scale,
                     computation={
                         "tool": "weibull_fit",
-                        "arguments": {"durations": durations, "event_observed": events},
+                        "arguments": {"dataset_name": "train_FD001"},
                     },
                 ),
             ]
@@ -101,13 +80,13 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
                 {
                     "step": 1,
                     "tool": "turbofan_dataset_query",
-                    "args": {"dataset": "FD001", "limit": 20},
+                    "args": {"dataset": "train_FD001", "limit": 20},
                     "result": f"Loaded {len(durations)} run-to-failure records.",
                 },
                 {
                     "step": 2,
                     "tool": "weibull_fit",
-                    "args": {"durations": durations, "event_observed": [1] * len(durations)},
+                    "args": {"dataset_name": "train_FD001"},
                     "result": res,
                 },
                 {
@@ -119,28 +98,7 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
             ]
 
         elif "outlier" in prompt.lower() or "mad" in prompt.lower():
-            durations = [
-                112.0,
-                145.0,
-                166.0,
-                180.0,
-                192.0,
-                205.0,
-                218.0,
-                225.0,
-                238.0,
-                245.0,
-                256.0,
-                269.0,
-                281.0,
-                299.0,
-                310.0,
-                325.0,
-                341.0,
-                355.0,
-                362.0,
-                520.0,
-            ]
+            durations = [120.0, 135.0, 150.0, 160.0, 180.0, 500.0]
             out_res = outliers(durations, method="mad")
             cnt = float(out_res["count"])
 
@@ -156,7 +114,7 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
                     value=cnt,
                     computation={
                         "tool": "outliers",
-                        "arguments": {"values": durations, "method": "mad", "threshold": 3.5},
+                        "arguments": {"dataset_name": "train_FD001", "method": "mad"},
                     },
                 ),
             ]
@@ -176,7 +134,7 @@ def render_agent_studio_view(current_role: str = "analyst") -> None:
                 {
                     "step": 2,
                     "tool": "outliers",
-                    "args": {"method": "mad", "threshold": 3.5},
+                    "args": {"dataset_name": "train_FD001", "method": "mad"},
                     "result": out_res,
                 },
             ]
