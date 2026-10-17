@@ -2,7 +2,8 @@
 
 import json
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 import yaml
 
 
@@ -12,13 +13,13 @@ def run_evals(mode: str = "replay") -> dict:
     prompt_version = "v1.0.0"
     prompt_path = os.path.join("agents", "prompts", "v1.yaml")
     if os.path.exists(prompt_path):
-        with open(prompt_path, "r") as f:
+        with open(prompt_path) as f:
             data = yaml.safe_load(f)
             prompt_version = data.get("prompt_version", "v1.0.0")
 
     # Metrics computation (replay mode uses deterministic benchmark results)
     metrics = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "mode": mode,
         "prompt_version": prompt_version,
         "metrics": {
@@ -34,7 +35,7 @@ def run_evals(mode: str = "replay") -> dict:
     }
 
     os.makedirs("evals/reports", exist_ok=True)
-    report_path = os.path.join("evals", "reports", f"report_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json")
+    report_path = os.path.join("evals", "reports", f"report_{datetime.now(UTC).strftime('%Y%m%d_%H%M%S')}.json")
     with open(report_path, "w") as f:
         json.dump(metrics, f, indent=2)
 

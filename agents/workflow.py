@@ -1,8 +1,9 @@
 """LangGraph workflow definition with interruption before consequential actions and Postgres checkpointer."""
 
-from typing import Annotated, Any, TypedDict
-from langgraph.graph import END, START, StateGraph
+from typing import Any, TypedDict
+
 from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import END, START, StateGraph
 
 from tools.inspection_tools import flag_units_for_inspection
 

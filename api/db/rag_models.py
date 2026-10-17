@@ -1,8 +1,8 @@
 """Documents and Chunks ORM models with pgvector support for RAG."""
 
-from sqlalchemy import Float, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from pgvector.sqlalchemy import Vector
+from sqlalchemy import ForeignKey, Integer, String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from api.db.models import Base
 

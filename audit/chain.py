@@ -2,10 +2,11 @@
 
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-from sqlalchemy import Float, Integer, String, Text, select
-from sqlalchemy.orm import Mapped, mapped_column, Session
+
+from sqlalchemy import Integer, String, Text, select
+from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from api.db.models import Base
 
@@ -82,7 +83,7 @@ class AuditChain:
         ).first()
 
         prev_hash = last_event.hash if last_event else "0" * 64
-        timestamp = datetime.now(timezone.utc).isoformat()
+        timestamp = datetime.now(UTC).isoformat()
 
         redacted_inputs = redactor(inputs) if inputs else None
         redacted_outputs = redactor(outputs) if outputs else None

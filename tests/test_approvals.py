@@ -5,12 +5,11 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from agents.workflow import create_approval_workflow
 from api.db.inspection_models import InspectionFlag
 from api.db.models import Base, Role, User
 from api.db.session import get_db
 from api.main import app
-from agents.workflow import create_approval_workflow
-from tools.inspection_tools import flag_units_for_inspection
 
 
 @pytest.fixture
@@ -113,16 +112,6 @@ def test_approvals_api_endpoints(client_and_db):
 """Unit tests for human approval workflow, separation of duties, rollback, and LangGraph pausing/resuming."""
 
 import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from api.db.inspection_models import InspectionFlag
-from api.db.models import Base, Role, User
-from api.db.session import get_db
-from api.main import app
-from agents.workflow import create_approval_workflow
-from tools.inspection_tools import flag_units_for_inspection
 
 
 @pytest.fixture

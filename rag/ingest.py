@@ -1,13 +1,12 @@
 """PDF parsing, chunking, deduplication, and document versioning pipeline."""
 
 import hashlib
-from datetime import datetime, timezone
-import os
-from typing import List, Tuple
+from datetime import UTC, datetime
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from api.db.rag_models import Document, Chunk
+from api.db.rag_models import Chunk, Document
 from rag.embedder import embedder
 
 
@@ -15,7 +14,7 @@ def compute_hash(file_bytes: bytes) -> str:
     return hashlib.sha256(file_bytes).hexdigest()
 
 
-def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]:
+def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> list[str]:
     """Split text into overlapping chunks."""
     words = text.split()
     if not words:
@@ -42,7 +41,7 @@ def ingest_pdf(db: Session, filename: str, file_bytes: bytes, role_access: str =
         return existing  # Unchanged, skip re-ingestion
 
     new_version = (existing.version + 1) if existing else 1
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     doc = Document(
         filename=filename,
@@ -57,8 +56,9 @@ def ingest_pdf(db: Session, filename: str, file_bytes: bytes, role_access: str =
     # Parse PDF using pypdf if available, else fallback to text extraction simulation
     pages_text = []
     try:
-        from pypdf import PdfReader
         import io
+
+        from pypdf import PdfReader
         reader = PdfReader(io.BytesIO(file_bytes))
         for page_num, page in enumerate(reader.pages, start=1):
             txt = page.extract_text() or ""

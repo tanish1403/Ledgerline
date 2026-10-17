@@ -1,6 +1,5 @@
 """Unit tests for reliability statistics, dataset models, and deterministic claim validator."""
 
-import pytest
 from reliability.stats import kaplan_meier, outliers, summary_stats, weibull_fit
 from validators.recompute import AgentAnswer, Claim, validate_claims
 

@@ -1,16 +1,17 @@
 """Hybrid retrieval combining vector similarity and full-text search with Reciprocal Rank Fusion (RRF)."""
 
-from typing import List, Dict, Any
+from typing import Any
+
 from sqlalchemy import text as sql_text
 from sqlalchemy.orm import Session
 
 from rag.embedder import embedder
 
 
-def reciprocal_rank_fusion(vector_results: List[Dict[str, Any]], fts_results: List[Dict[str, Any]], k: int = 60) -> List[Dict[str, Any]]:
+def reciprocal_rank_fusion(vector_results: list[dict[str, Any]], fts_results: list[dict[str, Any]], k: int = 60) -> list[dict[str, Any]]:
     """Merge vector and FTS results using Reciprocal Rank Fusion (RRF)."""
-    scores: Dict[int, float] = {}
-    chunk_map: Dict[int, Dict[str, Any]] = {}
+    scores: dict[int, float] = {}
+    chunk_map: dict[int, dict[str, Any]] = {}
 
     for rank, item in enumerate(vector_results, start=1):
         cid = item["id"]
@@ -31,7 +32,7 @@ def reciprocal_rank_fusion(vector_results: List[Dict[str, Any]], fts_results: Li
     return merged
 
 
-def hybrid_retrieve(db: Session, query: str, role: str = "analyst", top_k: int = 5) -> List[Dict[str, Any]]:
+def hybrid_retrieve(db: Session, query: str, role: str = "analyst", top_k: int = 5) -> list[dict[str, Any]]:
     """Retrieve chunks using vector search and FTS, filtered by role access."""
     q_vec = embedder.embed([query])[0]
 

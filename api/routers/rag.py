@@ -1,15 +1,13 @@
 """RAG API router for question answering with citations and confidence flags."""
 
-from typing import Any
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
+from api.db.models import User
 from api.db.session import get_db
 from api.dependencies import get_current_user
-from api.db.models import User
-from rag.qa import answer_question, RAGAnswer
-
+from rag.qa import RAGAnswer, answer_question
 
 router = APIRouter(prefix="/rag", tags=["rag"])
 

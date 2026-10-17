@@ -1,9 +1,7 @@
 """Unit tests for evaluation runner and comparison regression gate."""
 
-import json
-import pytest
-from evals.run import run_evals
 from evals.compare import compare_reports
+from evals.run import run_evals
 
 
 def test_eval_runner_and_comparison():

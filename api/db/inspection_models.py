@@ -1,6 +1,6 @@
 """Inspection flags ORM model for human approval gate."""
 
-from sqlalchemy import Float, Integer, String, Text
+from sqlalchemy import Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from api.db.models import Base

@@ -1,8 +1,9 @@
 """Approvals and inspection flags router with separation of duties, rollback, and audit logging."""
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -12,7 +13,6 @@ from api.db.models import Role, User
 from api.db.session import get_db
 from api.dependencies import require_role
 from audit.chain import AuditChain
-
 
 router = APIRouter(prefix="", tags=["approvals"])
 
@@ -69,7 +69,7 @@ def approve_inspection(
             detail="Separation of duties violation: Requester cannot approve their own inspection request.",
         )
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     flag.decided_by = admin.username
     flag.decided_at = now
     flag.applied_at = now
@@ -117,7 +117,7 @@ def reject_inspection(
             detail="Separation of duties violation: Requester cannot reject their own inspection request.",
         )
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     flag.status = "rejected"
     flag.decided_by = admin.username
     flag.decided_at = now
@@ -158,7 +158,7 @@ def rollback_inspection(
             detail=f"Only applied inspection flags can be rolled back (current: {flag.status}).",
         )
 
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     flag.status = "rolled_back"
     flag.rolled_back_at = now
     db.commit()

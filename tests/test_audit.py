@@ -1,9 +1,9 @@
 """Unit tests for tamper-evident audit log, hash chain verification, redaction, and concurrency."""
 
 import concurrent.futures
-import threading
+
 import pytest
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from api.db.models import Base

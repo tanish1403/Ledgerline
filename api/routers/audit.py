@@ -1,7 +1,8 @@
 """Audit log router for admin querying and verification."""
 
 from typing import Any
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -9,7 +10,6 @@ from api.db.models import Role, User
 from api.db.session import get_db
 from api.dependencies import require_role
 from audit.chain import AuditChain, AuditEvent
-
 
 router = APIRouter(prefix="/audit", tags=["audit"])
 

@@ -1,6 +1,7 @@
 """Script to load C-MAPSS turbofan dataset files into PostgreSQL tables."""
 
 from pathlib import Path
+
 from sqlalchemy.orm import Session
 
 from api.db.reliability_models import EngineCycle, EngineLife

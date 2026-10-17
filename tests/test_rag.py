@@ -4,9 +4,9 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from api.db.models import Base, Role, User
+from api.db.models import Base
 from rag.ingest import ingest_pdf
-from rag.qa import answer_question, verify_citation, Citation, RAGAnswer
+from rag.qa import Citation, answer_question, verify_citation
 
 
 @pytest.fixture

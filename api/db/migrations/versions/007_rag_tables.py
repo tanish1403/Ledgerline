@@ -1,9 +1,8 @@
 """Alembic migration for documents and chunks tables with pgvector extension."""
 
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from pgvector.sqlalchemy import Vector
-
 
 revision = "007_rag_tables"
 down_revision = "006_inspection_flags"

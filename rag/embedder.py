@@ -1,7 +1,5 @@
 """Embedder interface supporting sentence-transformers (bge-small) and fallback test mode."""
 
-import os
-from typing import List
 import numpy as np
 
 
@@ -22,7 +20,7 @@ class Embedder:
                 # Fallback to deterministic random projection for tests / offline environments without internet
                 self._model = "fake"
 
-    def embed(self, texts: List[str]) -> List[List[float]]:
+    def embed(self, texts: list[str]) -> list[list[float]]:
         self._load_model()
         if self._model == "fake":
             # Deterministic pseudo-embeddings for unit tests

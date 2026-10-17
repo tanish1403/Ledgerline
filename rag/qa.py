@@ -1,6 +1,5 @@
 """RAG question answering, citation verification, and confidence scoring."""
 
-from typing import List, Optional
 from pydantic import BaseModel, Field
 
 from rag.retrieval import hybrid_retrieve
@@ -14,12 +13,12 @@ class Citation(BaseModel):
 
 class RAGAnswer(BaseModel):
     answer: str = Field(..., description="Answering text or 'not found'.")
-    citations: List[Citation] = Field(default_factory=list)
+    citations: list[Citation] = Field(default_factory=list)
     confidence: float = Field(..., description="Confidence score between 0.0 and 1.0.")
     is_confident: bool = Field(..., description="True if confidence is above calibration threshold.")
 
 
-def verify_citation(citation: Citation, retrieved_chunks: List[dict]) -> bool:
+def verify_citation(citation: Citation, retrieved_chunks: list[dict]) -> bool:
     """Reject any citation whose quote is not found verbatim in the retrieved text."""
     for chunk in retrieved_chunks:
         if chunk["filename"] == citation.document and chunk["page"] == citation.page:

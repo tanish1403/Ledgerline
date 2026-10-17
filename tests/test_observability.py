@@ -6,7 +6,7 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import SimpleSpanProcessor
 from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 
-from api.telemetry import setup_telemetry, tool_calls_total, tool_errors_total, llm_tokens_total
+from api.telemetry import setup_telemetry, tool_calls_total
 
 
 @pytest.fixture

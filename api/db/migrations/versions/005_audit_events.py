@@ -1,8 +1,7 @@
 """Alembic migration for audit_events table and append-only trigger."""
 
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 revision = "005_audit_events"
 down_revision = "004_reliability"  # or previous milestone revision

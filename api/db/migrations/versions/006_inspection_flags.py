@@ -1,8 +1,7 @@
 """Alembic migration for inspection_flags table."""
 
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 revision = "006_inspection_flags"
 down_revision = "005_audit_events"

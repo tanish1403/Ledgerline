@@ -3,12 +3,12 @@
 import json
 import logging
 from typing import Any
+
 from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from prometheus_client import Counter, Histogram, Gauge
-
+from prometheus_client import Counter, Gauge, Histogram
 
 # Prometheus Custom Metrics
 tool_calls_total = Counter("tool_calls_total", "Total tool executions", ["tool_name", "status"])

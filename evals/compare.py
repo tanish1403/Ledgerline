@@ -6,9 +6,9 @@ import sys
 
 def compare_reports() -> bool:
     try:
-        with open("evals/baseline.json", "r") as f:
+        with open("evals/baseline.json") as f:
             baseline = json.load(f)
-        with open("evals/reports/latest.json", "r") as f:
+        with open("evals/reports/latest.json") as f:
             latest_report = json.load(f)
             latest = latest_report.get("metrics", {})
     except Exception as e:
